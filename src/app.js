@@ -1,25 +1,45 @@
-/* eslint-disable */
-import "bootstrap";
-import "./style.css";
+// script.js
 
-import "./assets/img/rigo-baby.jpg";
-import "./assets/img/4geeks.ico";
+// Arrays de partes de dominio
+const pronoun = ["the", "our"];
+const adj = ["big", "great"];
+const noum = ["jogger", "racoon"];
+const extensions = [".com", ".net"];
 
-window.onload = function() {
-  //write your code here
-  console.log("Hello Rigo from the console!");
-};
-let pronoun = ["the", "our"];
-let adj = ["great", "big"];
-let noun = ["jogger", "racoon"];
-let extension = [".us", ".com", ".net", ".io"];
+// Función para generar dominios
+function generateDomains() {
+  let domains = [];
 
-for (let mix of pronoun) {
-  for (let value of adj) {
-    for (let num of noun) {
-      for (let digit of extension) {
-        console.log(mix + value + num + digit);
+  // Bucles anidados para combinar las partes
+  for (let i = 0; i < pronoun.length; i++) {
+    for (let j = 0; j < adj.length; j++) {
+      for (let k = 0; k < noum.length; k++) {
+        for (let l = 0; l < extensions.length; l++) {
+          let domain = pronoun[i] + adj[j] + noum[k] + extensions[l];
+          domains.push(domain);
+        }
       }
     }
   }
+
+  return domains;
 }
+
+// Función para mostrar los dominios generados
+function displayDomains() {
+  const resultsDiv = document.getElementById("results");
+  resultsDiv.innerHTML = ""; // Limpiar resultados previos
+
+  const domains = generateDomains();
+
+  domains.forEach(domain => {
+    const p = document.createElement("p");
+    p.textContent = domain;
+    resultsDiv.appendChild(p);
+  });
+}
+
+// Agregar evento al botón
+document
+  .getElementById("generateButton")
+  .addEventListener("click", displayDomains);
