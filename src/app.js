@@ -1,5 +1,3 @@
-// script.js
-
 // Arrays de partes de dominio
 const pronoun = ["the", "our"];
 const adj = ["big", "great"];
@@ -8,15 +6,14 @@ const extensions = [".com", ".net"];
 
 // Función para generar dominios
 function generateDomains() {
-  let domains = [];
+  const domains = [];
 
   // Bucles anidados para combinar las partes
-  for (let i = 0; i < pronoun.length; i++) {
-    for (let j = 0; j < adj.length; j++) {
-      for (let k = 0; k < noum.length; k++) {
-        for (let l = 0; l < extensions.length; l++) {
-          let domain = pronoun[i] + adj[j] + noum[k] + extensions[l];
-          domains.push(domain);
+  for (const p of pronoun) {
+    for (const a of adj) {
+      for (const n of noum) {
+        for (const e of extensions) {
+          domains.push(p + a + n + e);
         }
       }
     }
@@ -32,11 +29,15 @@ function displayDomains() {
 
   const domains = generateDomains();
 
+  const fragment = document.createDocumentFragment(); // Usar fragmento para minimizar el reflujo
+
   domains.forEach(domain => {
     const p = document.createElement("p");
     p.textContent = domain;
-    resultsDiv.appendChild(p);
+    fragment.appendChild(p);
   });
+
+  resultsDiv.appendChild(fragment); // Añadir todo el fragmento de una vez al DOM
 }
 
 // Agregar evento al botón
